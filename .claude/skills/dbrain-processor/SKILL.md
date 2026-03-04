@@ -327,7 +327,28 @@ mcp-cli call todoist add-tasks '{"tasks": [
 ## HH:MM [type]
 Content
 
-Types: [voice], [text], [forward from: Name], [photo]
+Types: [voice], [text], [forward from: Name], [photo], [claude-code]
+
+### [claude-code] entries (from Claude Code desktop sessions)
+
+Source: Claude Code writes session summaries after significant GiftMixer project work.
+
+Format:
+```
+## HH:MM [claude-code]
+Session: <description>
+- Decision: <architectural decision>
+- Done: <completed work>
+- Lesson: <learning/insight>
+- Next: <follow-up action>
+```
+
+Classification rules for [claude-code]:
+- `Decision:` line → save to `thoughts/ideas/giftmixer-decisions.md` (append with date + context)
+- `Lesson:` line → save to `thoughts/learnings/giftmixer-lessons.md` (append with date)
+- `Done:` line → summarize in report, touch relevant memory cards
+- `Next:` line → create Todoist task if actionable (label: "giftmixer", priority p3)
+- Always link to [[thoughts/projects/giftmixer-live-status]] if it exists
 
 ## Business Context Integration
 

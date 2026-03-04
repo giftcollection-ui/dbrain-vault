@@ -239,6 +239,43 @@ Reports use Telegram HTML:
 | `/organize` | Organize vault |
 | `/graph` | Analyze vault links |
 
+## Research Protocol (NotebookLM)
+
+When user says "research [topic]", "/do research: [topic]", or asks to deep-dive into a topic:
+
+1. `nlm list notebooks` — check if a relevant notebook exists
+2. If not: `nlm create notebook "[Topic]"`
+3. Add sources (up to 5): `nlm add source --url [url] --notebook "[Title]"`
+   - Accept: URLs, YouTube links, text content
+4. Query: `nlm query "[Title]" "summarize key findings and actionable insights"`
+5. Save findings to vault: `thoughts/ideas/[kebab-case-topic].md` with proper frontmatter
+6. Report findings in Telegram HTML format
+
+### NotebookLM Strategy
+
+| Content Type | Where | Why |
+|-------------|-------|-----|
+| Daily capture, tasks, CRM | Obsidian vault | Structured, linked, decay-managed |
+| Research (external sources, docs, articles) | NotebookLM | Multi-source synthesis, podcast gen |
+| Project overview (GiftMixer) | Both | Vault = live context, NLM = external sources |
+
+### Available NLM Commands
+
+```bash
+nlm list notebooks                              # List all notebooks
+nlm create notebook "Title"                     # Create notebook
+nlm add source --url URL --notebook "Title"     # Add URL source
+nlm add source --youtube URL --notebook "Title" # Add YouTube source
+nlm query "Title" "question"                    # Query notebook
+nlm audio create --notebook "Title"             # Generate podcast
+nlm mindmap create --notebook "Title"           # Generate mindmap
+```
+
+### Rules
+- NotebookLM = READ-HEAVY, WRITE-LIGHT tool. Feed sources, query for synthesis.
+- Canonical knowledge store = Obsidian vault. NLM is supplementary.
+- Always save key findings back to vault (don't leave knowledge only in NLM).
+
 ## Customization
 
 For personal overrides: create `CLAUDE.local.md`
