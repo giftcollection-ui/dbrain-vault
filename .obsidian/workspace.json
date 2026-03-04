@@ -1,0 +1,197 @@
+{
+  "main": {
+    "id": "2aa1958c66258b91",
+    "type": "split",
+    "children": [
+      {
+        "id": "76537f20f6bb0e52",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c00a2e4cceef3c28",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "goals/0-vision-3y.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "0-vision-3y"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "55157038b85315de",
+    "type": "split",
+    "children": [
+      {
+        "id": "7009260e99effbe4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2e40f5de4c97ff29",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
+            }
+          },
+          {
+            "id": "94ffe114636aa73f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
+            }
+          },
+          {
+            "id": "c6ad86189e601158",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b62cf430e54a3cc1",
+    "type": "split",
+    "children": [
+      {
+        "id": "64d34f171ef12ae5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b5bb1cfd551d49f8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "goals/0-vision-3y.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки для 0-vision-3y"
+            }
+          },
+          {
+            "id": "c3fe8242b7c334ef",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "goals/0-vision-3y.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки из 0-vision-3y"
+            }
+          },
+          {
+            "id": "0cfab19ae1ab3dd2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Теги"
+            }
+          },
+          {
+            "id": "bb40cf1e9f110bb5",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Все свойства"
+            }
+          },
+          {
+            "id": "bfde6775db031e96",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "goals/0-vision-3y.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Структура 0-vision-3y"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "bases:Создать новую базу": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "c00a2e4cceef3c28",
+  "lastOpenFiles": [
+    "goals/3-weekly.md",
+    "goals/2-monthly.md",
+    "blog/2026-01-08-consumer-ai-2030-predictions.md",
+    "blog/2025-01-10-vibe-coding-guide.md",
+    "templates/daily-template.md",
+    "templates/crm-template.md",
+    "MEMORY.md"
+  ]
+}
