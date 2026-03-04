@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "goals/0-vision-3y.md",
+                "file": "daily/2026-03-04.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0-vision-3y"
+              "title": "2026-03-04"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "goals/0-vision-3y.md",
+                "file": "daily/2026-03-04.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Обратные ссылки для 0-vision-3y"
+              "title": "Обратные ссылки для 2026-03-04"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "goals/0-vision-3y.md",
+                "file": "daily/2026-03-04.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Исходящие ссылки из 0-vision-3y"
+              "title": "Исходящие ссылки из 2026-03-04"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "goals/0-vision-3y.md",
+                "file": "daily/2026-03-04.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура 0-vision-3y"
+              "title": "Структура 2026-03-04"
             }
           }
         ]
@@ -188,10 +188,13 @@
   "lastOpenFiles": [
     "goals/3-weekly.md",
     "goals/2-monthly.md",
+    "goals/1-yearly-YYYY.md",
+    "goals/0-vision-3y.md",
+    "daily/2026-03-04.md",
+    "MEMORY.md",
     "blog/2026-01-08-consumer-ai-2030-predictions.md",
     "blog/2025-01-10-vibe-coding-guide.md",
     "templates/daily-template.md",
-    "templates/crm-template.md",
-    "MEMORY.md"
+    "templates/crm-template.md"
   ]
 }
