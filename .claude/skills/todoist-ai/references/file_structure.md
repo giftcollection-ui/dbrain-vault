@@ -1,3 +1,10 @@
+---
+type: note
+title: Repository File Structure
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Repository File Structure
 
 Total items: 133

@@ -1,3 +1,10 @@
+---
+type: note
+title: Todoist AI and MCP SDK
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Todoist AI and MCP SDK
 
 Library for connecting AI agents to Todoist. Includes tools that can be integrated into LLMs,

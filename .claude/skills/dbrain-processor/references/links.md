@@ -1,3 +1,10 @@
+---
+type: note
+title: Wiki-Links Building
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Wiki-Links Building
 
 ## Purpose

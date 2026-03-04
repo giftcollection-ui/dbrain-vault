@@ -1,6 +1,9 @@
 ---
 type: note
 description: "Vault health monitoring, MOC generation, link repair, and system evolution. Use this skill when checking vault quality metrics, regenerating MOC indexes, fixing broken links, finding backlinks, or triggering weekly system reflections. Also use it when the user mentions health score, link density, orphans, dead-ends, or description coverage."
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
 name: vault-health
 depends_on: [graph-builder]
 ---

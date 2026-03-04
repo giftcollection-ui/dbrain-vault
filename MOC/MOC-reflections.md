@@ -1,3 +1,10 @@
+---
+type: note
+title: Reflections
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Reflections
 
 Map of Content for personal reflections.

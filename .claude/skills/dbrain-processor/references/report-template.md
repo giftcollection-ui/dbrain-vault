@@ -1,3 +1,10 @@
+---
+type: note
+title: HTML Report Template
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # HTML Report Template
 
 ## CRITICAL: Output Format

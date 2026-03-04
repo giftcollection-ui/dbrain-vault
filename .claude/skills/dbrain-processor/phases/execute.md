@@ -1,3 +1,10 @@
+---
+type: note
+title: Phase 2: EXECUTE
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Phase 2: EXECUTE
 
 Read capture.json from Phase 1. Create Todoist tasks, save thoughts, update CRM.

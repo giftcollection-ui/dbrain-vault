@@ -1,6 +1,9 @@
 ---
 type: note
 title: Obsidian Markdown Rules
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
 ---
 # Obsidian Markdown Rules
 

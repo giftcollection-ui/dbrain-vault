@@ -1,3 +1,10 @@
+---
+type: note
+title: Second Brain Architecture
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Second Brain Architecture
 Дата: 2026-03-04
 Контекст: Полная настройка Agent Second Brain v2 + интеграция с Claude Code

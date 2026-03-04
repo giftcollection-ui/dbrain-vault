@@ -1,6 +1,10 @@
 ---
-name: note-organizer
+type: note
 description: Organize vault, find orphan notes, suggest connections, update MOC indexes, consolidate duplicates.
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+name: note-organizer
 ---
 
 # Note Organizer Agent

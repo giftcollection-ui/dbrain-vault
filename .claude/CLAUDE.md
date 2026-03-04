@@ -1,3 +1,10 @@
+---
+type: note
+title: Agent Second Brain
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Agent Second Brain
 
 Voice-first personal assistant for capturing thoughts and managing tasks via Telegram.

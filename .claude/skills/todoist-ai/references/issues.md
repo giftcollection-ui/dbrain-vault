@@ -1,3 +1,10 @@
+---
+type: note
+title: GitHub Issues
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # GitHub Issues
 
 Recent issues from the repository (18 total).

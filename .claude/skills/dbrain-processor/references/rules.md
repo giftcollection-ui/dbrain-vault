@@ -1,3 +1,10 @@
+---
+type: note
+title: Critical Processing Rules
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Critical Processing Rules
 
 See [ABOUT.md](ABOUT.md) for user context and preferences.

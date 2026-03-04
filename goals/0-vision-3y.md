@@ -1,8 +1,11 @@
 ---
 type: vision
+updated: YYYY-MM-DD
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
 horizon: 3-years
 period: 2025-2027
-updated: YYYY-MM-DD
 ---
 
 # Vision 2025-2027

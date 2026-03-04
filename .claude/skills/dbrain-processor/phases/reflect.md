@@ -1,3 +1,10 @@
+---
+type: note
+title: Phase 3: REFLECT
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Phase 3: REFLECT
 
 Read execute results. Generate HTML report. Update MEMORY. Write observations. Log to daily.

@@ -1,3 +1,10 @@
+---
+type: note
+title: Todoist Integration
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Todoist Integration
 
 ## Task Links Format

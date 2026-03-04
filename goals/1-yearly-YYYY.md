@@ -1,7 +1,10 @@
 ---
 type: yearly
-period: YYYY
 updated: YYYY-MM-DD
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+period: YYYY
 ---
 
 # Goals YYYY

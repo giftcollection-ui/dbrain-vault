@@ -2,7 +2,7 @@
 type: note
 title: Arscontexta Patterns for dbrain
 last_accessed: 2026-02-19
-relevance: 0.91
+relevance: 1.0
 tier: active
 ---
 # Arscontexta Patterns for dbrain

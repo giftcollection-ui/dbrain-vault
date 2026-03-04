@@ -1,3 +1,10 @@
+---
+type: note
+title: Frontmatter Schema
+last_accessed: 2026-03-04
+relevance: 1.0
+tier: active
+---
 # Frontmatter Schema
 
 YAML frontmatter schema for vault files.
