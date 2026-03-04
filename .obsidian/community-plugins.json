@@ -2,5 +2,6 @@
   "obsidian-git",
   "obsidian-local-rest-api",
   "smart-connections",
-  "gemini-scribe"
+  "gemini-scribe",
+  "smart-chatgpt"
 ]
