@@ -3,80 +3,90 @@ type: note
 title: Long-term Memory
 last_accessed: 2026-03-04
 relevance: 1.0
-tier: active
+tier: core
 ---
 # Long-term Memory
-
-Curated knowledge that persists across sessions. Part of the 3-layer memory architecture (hot context → searchable vault → archive). See `.claude/skills/agent-memory/SKILL.md` for details.
 
 ## User Profile
 
 | Field | Value |
 |-------|-------|
-| Name | [Your name] |
-| Timezone | [Your timezone, e.g., UTC+5] |
-| Location | [City/Country] |
-| Primary language | [e.g., Russian/English] |
+| Role | Основатель и создатель GiftMixer |
+| TG | @crafting |
+| Primary language | Русский (код — English) |
+| Method | Агентный инжиниринг (vibe coding + skills system) |
 
 ## Preferences
 
 ### Tech Stack
-- Languages: [e.g., Python, TypeScript]
-- Frameworks: [e.g., React, FastAPI]
-- Tools: [e.g., Cursor, Claude Code]
+- Frontend: React 18 + Vite + TypeScript + Tailwind CSS
+- Backend: Supabase Edge Functions (Deno), 57 функций
+- AI: Gemini 3 Pro, FAL.ai (Flux, Kling, WAN), Seedream, Krea
+- Platform: Telegram Mini App + Bot API
+- Tools: Claude Code (15 скиллов), Obsidian, Second Brain Bot
 
 ### Communication Style
-- Preferred response language: [Russian/English/Mixed]
-- Detail level: [Brief/Detailed]
-- Code comments: [Minimal/Verbose]
-
-### Habits
-- Morning routine: [if relevant]
-- Work hours: [e.g., 10:00-19:00]
-- Planning cadence: [weekly/daily]
+- Язык: русский, код — английский
+- Тон: на ты, бро-стиль, профи + адаптивный
+- Detail level: по делу, без воды
+- Без эмодзи в файлах без просьбы
 
 ## Key Decisions
 
 | Date | Decision | Context |
 |------|----------|---------|
-| YYYY-MM-DD | Example: Use uv instead of pip | Better dependency management |
+| 2026-02 | Provider Router с fallback chains | nanoBananaPro → falFlux → lovable |
+| 2026-02 | Identity System (strict/balanced/free) | Контроль сохранения исходного подарка |
+| 2026-02 | 15 специализированных скиллов | Проект слишком большой для одного контекста |
+| 2026-03 | Security Sprint (4 CRITICAL) | Auth, CORS, API keys, payment webhook |
+| 2026-03 | Second Brain v2 | Telegram бот + Claude CLI + Obsidian vault |
+| 2026-03 | Git-based vault sync | VPS push */10 → GitHub → Obsidian Git pull |
 
 ## Active Context
 
-### ONE Big Thing (This Week)
-<!-- From goals/3-weekly.md -->
-- [ ] [Current week's main focus]
+### ONE Big Thing
+- [ ] Стабилизация существующих фич + запуск Second Brain автоматизации
 
 ### Hot Projects
-1. [Project name] — [status/next action]
-
-### Pipeline/Leads
-<!-- If applicable -->
-- [Lead name] — [status]
+1. **GiftMixer** — AI-платформа в Telegram Mini App (production)
+2. **Second Brain** — система управления знаниями (operational)
 
 ## Key People
 
 | Name | Role | Contact | Notes |
 |------|------|---------|-------|
-| [Name] | [Role] | [Telegram/Email] | [Context] |
+| Основатель | Owner + Solo Developer | @crafting | Все решения принимает он |
 
 ## Learnings
 
 ### What Worked
-- [Pattern/approach that was successful]
+- Агентный подход: 15 скиллов с автообновлением
+- Security audit перед запуском — нашли 4 CRITICAL
+- Git-based sync для vault (Syncthing не заработал)
+- Memory Engine (Ebbinghaus decay) — знания не теряются
 
 ### What Didn't Work
-- [Anti-pattern to avoid]
+- nlm CLI на Windows — порт 9223 заблокирован системно
+- Syncthing на Windows — несовместимость версий
+- taskkill /F для Chrome — потеря cookies и сессий
+- Bracket tags в промптах — модели не понимают
 
 ### Rules to Remember
-- [Important rule discovered during work]
+- НИКОГДА force kill браузер
+- I2V промпт = ТОЛЬКО движение + камера
+- Стиль первым в Seedream промпте
+- Всегда getGiftImageUrl() вместо gift.imageUrl
+- Аудит ПЕРЕД реализацией
 
 ## Quick Links
 
-- [[goals/3-weekly]] — Weekly focus
-- [[goals/2-monthly]] — Monthly priorities
-- [[MOC/index]] — Maps of Content
+- [[thoughts/projects/giftmixer-overview]] — Обзор GiftMixer
+- [[thoughts/projects/giftmixer-roadmap]] — Roadmap
+- [[thoughts/ideas/giftmixer-decisions]] — Решения
+- [[thoughts/learnings/giftmixer-lessons]] — Уроки
+- [[thoughts/ideas/second-brain-architecture]] — Архитектура Second Brain
+- [[goals/3-weekly]] — Цели на неделю
 
 ---
 
-*Last updated: YYYY-MM-DD*
+*Last updated: 2026-03-04*
