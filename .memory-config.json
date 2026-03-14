@@ -2,12 +2,23 @@
   "tiers": {"active": 7, "warm": 21, "cold": 60},
   "decay_rate": 0.015,
   "relevance_floor": 0.1,
-  "skip_patterns": ["_index.md"],
+  "skip_patterns": ["_index.md", "MEMORY.md"],
   "type_inference": {
     "crm/": "crm",
     "leads/": "lead",
     "clients/": "client",
-    "projects/": "project"
+    "projects/": "project",
+    "thoughts/learnings/": "learning",
+    "thoughts/ideas/": "idea",
+    "thoughts/tasks/": "task",
+    "thoughts/projects/": "project",
+    "thoughts/reflections/": "reflection",
+    "thoughts/research/": "research",
+    "thoughts/security/": "security",
+    "thoughts/economics/": "economics",
+    "daily/": "daily",
+    "goals/": "goal",
+    "blog/": "blog"
   },
   "use_git_dates": true
 }

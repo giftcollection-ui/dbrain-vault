@@ -1,87 +1,146 @@
 ---
 type: idea
-title: Second Brain — Complete Architecture
-date: 2026-03-04
-tags: [second-brain, architecture, telegram-bot, obsidian, vault]
+title: Second Brain — Complete Architecture v3
+date: 2026-03-15
+tags: [second-brain, architecture, telegram-bot, obsidian, vault, skills, feedback-loop]
+last_accessed: 2026-03-15
+relevance: 1.0
+tier: core
 ---
-# Second Brain — Complete Architecture
+# Second Brain — Complete Architecture v3
 
-Дата: 2026-03-04
-Статус: v2.0, все основные компоненты работают
+Дата: 2026-03-15
+Статус: v3.0 — все компоненты работают + vault-skill feedback loop + расширенные категории
 
-## Схема системы
+## Системная диаграмма
 
 ```
-                    ┌──────────────────────────────┐
-                    │     ВХОДНЫЕ КАНАЛЫ            │
-                    ├──────────────────────────────┤
-                    │  Голос → Deepgram → текст     │
-                    │  Текст → напрямую             │
-                    │  Фото → Claude описание       │
-                    │  Пересланные → с атрибуцией   │
-                    │  /do → произвольная задача     │
-                    └──────────┬───────────────────┘
-                               │
-                    ┌──────────▼───────────────────┐
-                    │  TELEGRAM BOT (VPS 24/7)      │
-                    │  aiogram 3.0 + Deepgram       │
-                    │  systemd: d-brain-bot.service  │
-                    │  Hetzner CX11, user: dbrain    │
-                    └──────────┬───────────────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              │                │                │
-    ┌─────────▼──────┐ ┌──────▼──────┐ ┌───────▼──────┐
-    │ /process       │ │ /do         │ │ /weekly      │
-    │ Daily Pipeline │ │ Free-form   │ │ Digest       │
-    │ 3 phases:      │ │ Claude CLI  │ │ Goals check  │
-    │ capture→       │ │ + MCP tools │ │ + summary    │
-    │ execute→       │ │ Any request │ │              │
-    │ reflect        │ │             │ │              │
-    └────────┬───────┘ └──────┬──────┘ └───────┬──────┘
-             │                │                │
-             └────────────────┼────────────────┘
-                              │
-                    ┌─────────▼────────────────────┐
-                    │  CLAUDE CLI (VPS)              │
-                    │  claude --print --mcp-config   │
-                    │  ANTHROPIC_API_KEY в .bashrc    │
-                    │  MCP: Todoist, файловая система │
-                    └─────────┬────────────────────┘
-                              │
-                    ┌─────────▼────────────────────┐
-                    │  OBSIDIAN VAULT (dbrain-vault) │
-                    │  GitHub: giftcollection-ui/    │
-                    │          dbrain-vault           │
-                    └─────────┬────────────────────┘
-                              │
-         ┌────────────────────┼──────────────────────┐
-         │                    │                      │
-┌────────▼───────┐  ┌────────▼───────┐  ┌───────────▼──────┐
-│ VPS → GitHub   │  │ GitHub →       │  │ Claude Code      │
-│ cron */10 push │  │ Obsidian Git   │  │ Read/Write       │
-│                │  │ auto-pull 10m  │  │ прямой доступ    │
-│                │  │                │  │ + REST API 27124 │
-└────────────────┘  └────────────────┘  └──────────────────┘
+                    +------------------------------+
+                    |     ВХОДНЫЕ КАНАЛЫ            |
+                    +------------------------------+
+                    |  Голос -> Deepgram -> текст    |
+                    |  Текст -> напрямую             |
+                    |  Фото -> Claude описание       |
+                    |  Пересланные -> с атрибуцией   |
+                    |  /do -> произвольная задача     |
+                    |  /chat -> Anthropic SDK         |
+                    |  /code -> Claude CLI + git      |
+                    |  Web query -> Perplexity API    |
+                    +--------------+---------------+
+                                   |
+                    +--------------v---------------+
+                    |  TELEGRAM BOT (VPS 24/7)      |
+                    |  aiogram 3.0 + Deepgram        |
+                    |  systemd: d-brain-bot.service   |
+                    |  IP: 23.94.252.50, user: dbrain |
+                    +--------------+---------------+
+                                   |
+              +--------------------+--------------------+
+              |                    |                     |
+    +---------v--------+ +--------v--------+ +---------v--------+
+    | /process         | | /do, /chat      | | Perplexity       |
+    | Daily Pipeline   | | Claude CLI/SDK  | | sonar-pro/deep   |
+    | 3 phases:        | | + MCP tools     | | Stream -> TG     |
+    | capture ->       | | Todoist, GitHub  | | [Save|Deep|NLM]  |
+    | execute ->       | | NotebookLM      | |                  |
+    | reflect          | | Filesystem      | |                  |
+    +--------+---------+ +--------+--------+ +--------+---------+
+             |                    |                     |
+             +--------------------+---------------------+
+                                  |
+                    +-------------v----------------+
+                    |  OBSIDIAN VAULT (dbrain-vault) |
+                    |  GitHub: giftcollection-ui/    |
+                    |          dbrain-vault           |
+                    +-------------+----------------+
+                                  |
+         +------------------------+----------------------------+
+         |                        |                            |
++--------v---------+  +---------v----------+  +---------------v---------+
+| VPS -> GitHub    |  | GitHub ->          |  | Claude Code (Desktop)   |
+| cron */10 push   |  | Obsidian Git       |  | Skills read VAULT       |
+|                  |  | auto-pull 10m      |  | CONTEXT on load         |
+|                  |  |                    |  | Write lessons/decisions |
+|                  |  |                    |  | Feedback loop           |
++------------------+  +--------------------+  +-------------------------+
 ```
+
+## v3.0 Нововведения
+
+### 1. Vault-Skill Feedback Loop
+Скиллы GiftMixer проекта теперь имеют секцию VAULT CONTEXT.
+При загрузке скилла Claude читает указанные vault файлы для живого контекста.
+
+```
+Skill loads -> reads vault learnings/decisions -> better context
+  |
+Work done -> new lesson discovered
+  |
+Write to vault SSOT files
+  |
+Next session -> skill reads updated vault
+```
+
+**Скиллы с VAULT CONTEXT:** prompt-architect, craft-engineer, quality-guardian, security-ops, video-pipeline-engineer
+
+### 2. SSOT Консолидация
+- **Lessons/Decisions SSOT** = vault файлы (не Claude memory)
+- Claude memory `lessons.md` и `decisions.md` = указатели на vault
+- Одна запись = одно место. Нет дублирования.
+
+### 3. Расширенные vault категории
+
+| Категория | Путь | Скиллы-потребители |
+|-----------|------|--------------------|
+| Уроки | `thoughts/learnings/` | prompt-architect, craft-engineer, quality-guardian |
+| Решения | `thoughts/ideas/` | все скиллы |
+| Задачи | `thoughts/tasks/` | quality-guardian, video-pipeline-engineer |
+| Проекты | `thoughts/projects/` | growth-marketer |
+| Рефлексии | `thoughts/reflections/` | agent-memory |
+| **Исследования** | `thoughts/research/` | prompt-architect, model-scout |
+| **Безопасность** | `thoughts/security/` | security-ops |
+| **Экономика** | `thoughts/economics/` | unit-economist |
+
+### 4. NotebookLM стратегия
+
+| Notebook | Назначение | Источники |
+|----------|-----------|-----------|
+| GiftMixer Platform | Продуктовый контекст | Vault notes, GitHub docs |
+| AI Models & Providers | Модели и цены | FAL.ai docs, blogs |
+| Telegram Mini Apps | Платформенные знания | TG docs, case studies |
+| Competitor Intelligence | Конкуренты | Сайты, обзоры |
+| Agent Engineering | Best practices | Papers, tutorials |
+
+Pipeline: Research -> NLM query -> Distill -> vault `thoughts/research/` -> cross-link
+
+### 5. Рекомендованные Obsidian плагины
+
+| Плагин | Что даст |
+|--------|----------|
+| **Dataview** | SQL-запросы по метаданным (tier, type, tags) |
+| **Templater** | Автозаполнение frontmatter, динамические daily notes |
+| **Periodic Notes** | Структурированные weekly/monthly reviews |
+| **Calendar** | Визуальная навигация по daily notes |
+| **Tasks** | Агрегация всех `- [ ]` из vault |
+| **DB Folder** | Табличный вид thoughts/ с сортировкой |
 
 ## Компоненты и статус
 
-| Компонент | Статус | Где | Примечание |
-|-----------|--------|-----|------------|
-| Telegram Bot | DONE | VPS, systemd 24/7 | aiogram 3.0, /start /help /status /do /process /weekly |
-| Deepgram Voice | DONE | API key в .env | Nova-3, транскрипция голосовых |
-| Claude CLI | DONE | VPS | claude --print --dangerously-skip-permissions --mcp-config |
-| MCP: Todoist | DONE | VPS | add-tasks, find-completed, user-info |
-| Memory Engine | DONE | Оба проекта | Ebbinghaus decay, 5 tiers, Python скрипт |
-| Vault Sync | DONE | Git-based | VPS push */10 → GitHub → Obsidian Git pull |
-| Obsidian REST API | DONE | Desktop, port 27124 | Claude Code читает/пишет |
-| Obsidian MCP | DONE | .mcp.json | mcp-obsidian + vault path |
-| Smart Connections | DONE | Obsidian plugin | Семантический поиск, TaylorAI/bge-micro-v2 |
-| Gemini Scribe | DONE | Obsidian plugin | AI-агент в Obsidian, Gemini API |
-| Daily Processing | DONE | systemd timer 21:00 | 3-фазный pipeline + graph + decay |
-| Weekly Digest | DONE | systemd timer Sun 20:00 | Анализ целей + summary |
-| NotebookLM CLI | BLOCKED | Windows port 9223 | Доступен через браузер |
+| Компонент | Статус | Где |
+|-----------|--------|-----|
+| Telegram Bot | DONE | VPS, systemd 24/7 |
+| Deepgram Voice | DONE | Nova-3, транскрипция |
+| Claude CLI | DONE | VPS, /do + /code + /chat |
+| Perplexity API | DONE | sonar-pro + sonar-deep-research |
+| MCP: Todoist | DONE | add-tasks, find-completed |
+| Memory Engine | DONE | Ebbinghaus decay, 5 tiers |
+| Vault Sync | DONE | Git-based, */10 |
+| Obsidian REST API | DONE | port 27124 |
+| Smart Connections | DONE | bge-micro-v2 embeddings |
+| Vault-Skill Loop | **v3.0** | 5 скиллов с VAULT CONTEXT |
+| SSOT Consolidation | **v3.0** | Lessons/decisions = vault only |
+| Extended Categories | **v3.0** | +research, +security, +economics |
+| NotebookLM CLI | BLOCKED | Windows port 9223 |
 
 ## Автоматические процессы
 
@@ -89,77 +148,62 @@ tags: [second-brain, architecture, telegram-bot, obsidian, vault]
 |---------|-----------|------------|
 | Vault push | */10 мин (cron) | git add + commit + push на VPS |
 | Obsidian pull | */10 мин (Git plugin) | git pull на десктопе |
-| Daily processing | 21:00 (systemd) | Classify entries → Todoist tasks → Report в Telegram |
-| Weekly digest | Sun 20:00 (systemd) | Анализ недели → summary → Telegram |
-| Memory decay | После каждого /process | Обновление relevance и tiers |
-| Graph rebuild | После каждого /process | Vault topology analysis |
+| Daily processing | 21:00 (systemd) | Classify -> Todoist -> Report |
+| Weekly digest | Sun 20:00 (systemd) | Анализ недели -> summary |
+| Memory decay | После /process | Обновление relevance и tiers |
+| Graph rebuild | После /process | Vault topology analysis |
+| Claude Code session | По запросу | Startup ritual + creative recall |
 
 ## Как пользоваться
 
 ### Ежедневно
 1. **Голос/текст в бота** — записывай мысли, идеи, задачи в любое время
-2. **В 21:00 автоматически** — Claude обработает: задачи → Todoist, идеи → vault, CRM → карточки
-3. **Отчёт в Telegram** — получишь HTML-отчёт о том что обработано
+2. **Web-запросы** — бот автоматически маршрутизирует в Perplexity
+3. **В 21:00** — автообработка: задачи -> Todoist, идеи -> vault
+4. **Отчёт в Telegram** — HTML-отчёт о том что обработано
 
 ### По запросу
-- `/do переместить задачи на понедельник` — Claude выполнит через Todoist MCP
-- `/do проанализируй мои цели за неделю` — Claude прочитает vault и ответит
-- `/process` — запустить обработку вручную (не ждать 21:00)
-- `/weekly` — запустить недельный дайджест вручную
-- `/status` — сколько записей сегодня
+- `/do переместить задачи на понедельник` — через Todoist MCP
+- `/chat` — разговор с Claude (Anthropic SDK, история)
+- `/code` — работа с gift-combo-creator через Claude CLI
+- `/search запрос` — поиск по vault
+- `/today` — что захвачено сегодня
+- `/reflect` — рефлексия дня
 
 ### В Obsidian
-- **Smart Connections** — открой заметку, справа покажутся семантически связанные
-- **Gemini Scribe** — AI-ассистент прямо в Obsidian, работает с vault
-- **Граф** — визуализация связей между заметками
-- **Daily notes** — автоматически создаются из бота
+- **Smart Connections** — семантически связанные заметки
+- **Gemini Scribe** — AI-ассистент прямо в Obsidian
+- **Граф** — визуализация связей
+- **Daily notes** — автоматически из бота
 
 ### В Claude Code
-- Прямое чтение/запись vault через файловую систему
-- REST API на порту 27124 для программного доступа
-- MCP server для инструментов vault (после рестарта)
+- Скиллы с VAULT CONTEXT читают vault при загрузке
+- Startup ritual: decay + creative recall + daily context
+- Lessons/decisions записываются в vault как SSOT
 
-## Структура vault
+## Ближайшие улучшения
 
-```
-dbrain-vault/
-├── daily/               ← Дневные записи (YYYY-MM-DD.md)
-├── goals/               ← Цели (3y → yearly → monthly → weekly)
-├── thoughts/
-│   ├── ideas/           ← Идеи и архитектурные решения
-│   ├── learnings/       ← Уроки и паттерны
-│   ├── projects/        ← Проекты
-│   ├── reflections/     ← Рефлексии
-│   └── tasks/           ← Задачи
-├── business/            ← CRM, контакты
-├── projects/            ← Клиенты, лиды
-├── blog/                ← Статьи
-├── MOC/                 ← Maps of Content (автогенерация)
-├── summaries/           ← Недельные сводки
-├── templates/           ← Шаблоны заметок
-├── .claude/             ← AI-агенты, скиллы, правила
-│   ├── skills/          ← dbrain-processor, graph-builder, todoist-ai, vault-health
-│   ├── agents/          ← inbox-processor, goal-aligner, note-organizer, weekly-digest
-│   └── rules/           ← daily-format, thoughts-format, weekly-reflection
-├── MEMORY.md            ← Долгосрочная память агента
-└── .memory-config.json  ← Настройки decay (Ebbinghaus)
-```
+### Высокий приоритет
+- [ ] Заполнить goals cascade (vision, weekly)
+- [ ] Активировать reflections (cron в 22:00)
+- [ ] Настроить SSH ключ для VPS с десктопа
+- [ ] Фикс WEB_KEYWORDS collision в text.py
+- [ ] Установить Dataview + Templater + Periodic Notes
 
-## Развитие системы
+### Средний приоритет
+- [ ] Smart Connections API для Claude Code
+- [ ] Унифицировать vault-скиллы и проект-скиллы
+- [ ] Decay-aware skill loading
+- [ ] NLM на VPS (Linux)
 
-### Ближайшее (можно сделать сейчас)
-- Заполнить vault информацией о GiftMixer (архитектура, решения, уроки)
-- Настроить Smart Connections embeddings с Anthropic/OpenAI моделью (качественнее чем bge-micro)
-- Добавить больше MCP серверов (GitHub, Notion, Calendar)
+### Долгосрочные
+- [ ] Cross-vault knowledge graph
+- [ ] Voice morning briefing (TTS)
+- [ ] Multi-vault support
+- [ ] Agent routing в боте
 
-### Среднесрок
-- Параллельные агенты: категоризация входящих → маршрутизация по специализированным Claude instances
-- Vault health sweep: автоматический поиск orphans, broken links, стагнирующих заметок
-- Telegram inline bot: быстрый поиск по vault прямо из любого чата
-- NotebookLM интеграция (когда nlm CLI починят / через VPS)
-
-### Долгосрок
-- Multi-vault: отдельные vault для разных проектов, cross-vault search
-- Voice-first dashboard: голосовой дайджест утром (TTS из weekly summary)
-- Autonomous research agent: Claude сам ищет информацию в интернете, добавляет в vault
-- Knowledge graph visualization: 3D граф связей в реальном времени
+## Связанные заметки
+- [[giftmixer-overview]] — Обзор GiftMixer
+- [[giftmixer-decisions]] — Архитектурные решения
+- [[giftmixer-lessons]] — Уроки
+- [[giftmixer-roadmap]] — Roadmap

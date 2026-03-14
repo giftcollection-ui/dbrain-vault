@@ -61,8 +61,15 @@ Help user stay aligned with goals, capture valuable insights, and maintain clari
 |--------|---------|
 | `daily/` | Raw daily entries (YYYY-MM-DD.md) |
 | `goals/` | Goal cascade (3y → yearly → monthly → weekly) |
-| `thoughts/` | Processed notes by category |
-| `MOC/` | Maps of Content indexes |
+| `thoughts/ideas/` | Ideas and architectural decisions |
+| `thoughts/learnings/` | Lessons and patterns (SSOT for Claude Code skills) |
+| `thoughts/tasks/` | Task tracking and roadmaps |
+| `thoughts/projects/` | Project overviews and roadmaps |
+| `thoughts/reflections/` | Session and weekly reflections |
+| `thoughts/research/` | Perplexity/NLM research results |
+| `thoughts/security/` | Security findings and audits |
+| `thoughts/economics/` | Pricing experiments and cost analysis |
+| `MOC/` | Maps of Content indexes (auto-generated) |
 | `attachments/` | Photos by date |
 | `business/` | Business data (CRM, network, events) |
 | `projects/` | Side projects (clients, leads) |
@@ -258,6 +265,30 @@ When user says "research [topic]", "/do research: [topic]", or asks to deep-dive
 | Daily capture, tasks, CRM | Obsidian vault | Structured, linked, decay-managed |
 | Research (external sources, docs, articles) | NotebookLM | Multi-source synthesis, podcast gen |
 | Project overview (GiftMixer) | Both | Vault = live context, NLM = external sources |
+| Competitor analysis | Both | NLM for sources, vault for actionable insights |
+| Learning paths | NotebookLM → vault | NLM aggregates, vault stores distilled knowledge |
+
+### NotebookLM Notebooks Strategy
+
+| Notebook | Purpose | Sources |
+|----------|---------|---------|
+| GiftMixer Platform | Product context for AI queries | Vault notes, GitHub docs, design docs |
+| AI Models & Providers | Model landscape updates | FAL.ai docs, model blogs, pricing pages |
+| Telegram Mini Apps | Platform knowledge | TG docs, developer blogs, case studies |
+| Competitor Intelligence | Market positioning | Competitor sites, reviews, case studies |
+| Agent Engineering | Agent/skill best practices | Research papers, blog posts, tutorials |
+
+### NLM Integration Patterns
+
+**Research → Vault pipeline:**
+1. User asks about topic → check NLM for existing notebook
+2. If exists: `nlm query` for synthesis
+3. If not: create notebook, add 3-5 sources, query
+4. Distill key findings → vault `thoughts/research/<topic>.md`
+5. Cross-link with existing vault notes via [[wikilinks]]
+
+**Podcast generation for review:**
+- After major research → `nlm audio create` → user listens on commute
 
 ### Available NLM Commands
 
@@ -275,6 +306,43 @@ nlm mindmap create --notebook "Title"           # Generate mindmap
 - NotebookLM = READ-HEAVY, WRITE-LIGHT tool. Feed sources, query for synthesis.
 - Canonical knowledge store = Obsidian vault. NLM is supplementary.
 - Always save key findings back to vault (don't leave knowledge only in NLM).
+- NLM CLI works on VPS (Linux), NOT on Windows (port 9223 blocked). Use browser on Windows.
+
+## GiftMixer Project Skills (Cross-System Awareness)
+
+This vault serves as SSOT for lessons and decisions consumed by GiftMixer project skills.
+Skills with `VAULT CONTEXT` sections read these files on load:
+
+| Vault File | Skills That Read It |
+|-----------|-------------------|
+| `thoughts/learnings/giftmixer-lessons.md` | prompt-architect, craft-engineer, quality-guardian, video-pipeline-engineer |
+| `thoughts/ideas/giftmixer-decisions.md` | prompt-architect, craft-engineer, security-ops, video-pipeline-engineer |
+| `thoughts/tasks/cinema-roadmap-p0-p3.md` | quality-guardian, video-pipeline-engineer |
+
+**Feedback loop:** Claude Code writes lessons/decisions → vault → next session skills read updated vault.
+
+## Obsidian Plugin Ecosystem
+
+### Installed & Active
+
+| Plugin | Purpose | Integration with Claude |
+|--------|---------|----------------------|
+| **obsidian-git** | Auto-sync every 10min | Enables VPS <-> Desktop <-> GitHub sync |
+| **obsidian-local-rest-api** | REST API on port 27124 | Claude Code reads/writes vault via API |
+| **smart-connections** | Semantic search (bge-micro-v2) | Find related notes automatically |
+| **gemini-scribe** | In-Obsidian AI with Gemini | Alternative AI for vault-local work |
+
+### Recommended Additions
+
+| Plugin | What it does | Why useful |
+|--------|-------------|-----------|
+| **Dataview** | SQL-like queries over metadata | Query notes by type/tag/tier from within Obsidian |
+| **Templater** | Advanced templates with JS | Auto-fill frontmatter, dynamic daily notes |
+| **Periodic Notes** | Weekly/monthly notes | Structured weekly reviews + monthly summaries |
+| **Calendar** | Calendar view of daily notes | Visual navigation of daily notes |
+| **Kanban** | Kanban boards from markdown | Visual task management inside vault |
+| **Tasks** | Task aggregation across vault | Collect all `- [ ]` items into one view |
+| **DB Folder** | Database-like views of folders | Table view of thoughts/ with sorting/filtering |
 
 ## Customization
 
@@ -290,4 +358,4 @@ For personal overrides: create `CLAUDE.local.md`
 
 ---
 
-*System Version: 3.0*
+*System Version: 3.1 — Updated 2026-03-15 (vault-skill integration, NLM strategy, plugin ecosystem)*
