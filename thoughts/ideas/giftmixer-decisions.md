@@ -1,63 +1,104 @@
 ---
 type: idea
 title: GiftMixer — Key Decisions
-date: 2026-03-04
+date: 2026-03-15
 tags: [giftmixer, architecture, decisions]
+last_accessed: 2026-03-15
+relevance: 1.0
+tier: core
 ---
 # GiftMixer — Ключевые архитектурные решения
+
+## 2026-03 — Cinema Compose Root Cause (image_prompt_strength bug)
+
+**Контекст:** Kontext Pro (`fal-ai/flux-pro/kontext`) использовал `image_prompt_strength: 0.92` — 92% веса на текст, 8% на reference image. Персонаж ИГНОРИРОВАЛСЯ.
+**Решение:** `image_prompt_strength: 0.35` (хорошо сохраняет внешность) или `0.45` (компромисс).
+**Урок:** Удалили compose step вместо того чтобы исправить параметр — это откатило архитектуру НАЗАД.
+**Pipeline:** Cast → Compose (Kontext Pro, strength=0.35) → I2V
+
+## 2026-03 — Cinema Pipeline v2 — Character Consistency
+
+**Три принципа (экспертный аудит):**
+1. **NO Flux Character Sheets** — подарки = авторские 3D-модели. Flux галлюцинирует "вид сзади". Извлекать оригинальные кадры из анимации, не AI.
+2. **Inpainting/Compositing** — НЕ голый Flux с reference. Нейросеть генерит фон, персонаж вписывается через Kontext Pro / маскинг.
+3. **Cache anchors, NOT generations** — кэшировать промпты и маски, НЕ готовые видео.
+
+## 2026-03 — Security Sprint (4 CRITICAL)
+
+**Контекст:** Аудит безопасности перед запуском.
+**Решения:**
+1. Auth bypass fix: `isDevEnvironment()` = `import.meta.env.DEV` only
+2. Payment webhook: signature validation (`x-telegram-bot-api-secret-token`) + idempotency
+3. API key: OpenRouter → server-side `adapt-prompt` edge fn (translate mode)
+4. CORS: `Allow-Origin: *` → whitelist через `_shared/cors.ts` для всех 57 edge functions
+
+## 2026-03 — Agent Second Brain
+
+**Контекст:** Разработка генерирует знания которые теряются между сессиями.
+**Решение:** Telegram бот + Claude CLI на VPS + Obsidian vault с Git sync + Memory Engine (Ebbinghaus decay).
+**Результат:** Единая система где информация автоматически классифицируется, связывается и доступна из любой точки.
+
+## 2026-03 — Агентный инжиниринг (27 скиллов)
+
+**Контекст:** Проект слишком большой для одного контекстного окна.
+**Решение:** 27 специализированных скиллов с доменными знаниями, cross-domain knowledge и self-update rules. Маршрутизация по триггерам в CLAUDE.md.
+**Формат:** CRITICAL → KEY FILES → PATTERNS → DELEGATE → INLINE KNOWLEDGE → SELF-UPDATE → REFERENCES
 
 ## 2026-02 — Provider Router с fallback chains
 
 **Контекст:** AI-модели нестабильны, каждая имеет свои сильные стороны.
-**Решение:** Роутер с цепочками fallback: nanoBananaPro → falFlux → lovable. Каждый провайдер адаптирует промпт под свои особенности.
-**Результат:** Генерация не падает если один провайдер лежит. Разные модели для разных задач.
+**Решение:** Роутер с цепочками fallback: nanoBananaPro → falFlux → lovable.
+**Результат:** Генерация не падает если один провайдер лежит.
 
 ## 2026-02 — Identity System (strict/balanced/free)
 
 **Контекст:** При крафтах нужно контролировать насколько AI сохраняет исходный подарок.
-**Решение:** 3 режима identity в промптах: strict (максимальное сохранение), balanced (творческая свобода с узнаваемостью), free (полная свобода).
-**Результат:** Пользователь контролирует "насколько похоже на оригинал".
+**Решение:** 3 режима: strict (максимальное сохранение), balanced (творческая свобода), free (полная свобода).
 
 ## 2026-02 — Seedream Compose для multi-image
 
-**Контекст:** Нужно объединять 2+ изображения в одно (fusion подарков).
-**Решение:** Seedream V4/V5 Edit с multi-image composition. Natural language промпты (не bracket tags). Стиль первым в промпте.
-**Урок:** ByteDance модели не знают культурные ссылки (Ohuenko, Lisa Frank). Только универсальные визуальные дескрипторы.
+**Решение:** Seedream V4/V5 Edit с multi-image composition. Natural language промпты.
+**Урок:** ByteDance модели не знают культурные ссылки. Только универсальные визуальные дескрипторы.
 
 ## 2026-02 — bypassServerEnhancement для крафтов
 
-**Контекст:** Серверный prompt enhancement портил крафт-промпты.
-**Решение:** Флаг `bypassServerEnhancement: true` для craft pipeline — промпт идёт на модель as-is.
-**Результат:** Клиент полностью контролирует промпт.
+**Решение:** `bypassServerEnhancement: true` для craft pipeline — smart-prompt-engine НЕ используется.
+**Результат:** Клиент полностью контролирует промпт. `appendProviderSuffix` тоже скиппается.
 
-## 2026-03 — Cinema Visual Consistency
+## 2026-02 — Sticker Pack Builder V2
 
-**Контекст:** В видео-сценах персонажи менялись между кадрами.
-**Решение:**
-- Visual Bible (10-15 слов) — компактный стиль-дескриптор для всех сцен
-- I2V промпт = ТОЛЬКО движение + камера (никаких описаний персонажа)
-- First-Frame Chaining — последний кадр предыдущей сцены → input следующей
-- Anti-mutation rule в Director промпте
-**Результат:** Визуальная консистентность между сценами.
+- Zustand store `stickerPackBuilderStore` отдельный от `workspaceStore`
+- Parallel generation: Semaphore(3), контроль concurrency
+- Smart ordering: happy first, then contrasting, then rest
+- Situation IDs plain (`moon`), не prefixed
+- 10 templates
 
-## 2026-03 — Security Sprint (4 CRITICAL)
+## 2026-02 — FAL Provider Migration
 
-**Контекст:** Перед запуском — аудит безопасности.
-**Решение:**
-1. Auth bypass fix: `isDevEnvironment()` = `import.meta.env.DEV` only
-2. Payment webhook: signature validation + idempotency
-3. API key: OpenRouter → server-side edge function
-4. CORS: `Allow-Origin: *` → whitelist для всех 57 edge functions
-**Результат:** Production-ready security.
+- Hailuo: Krea → FAL `fal-ai/minimax/hailuo-02/standard/image-to-video`
+- Kling: Krea → FAL `fal-ai/kling-video/v2.5-turbo/pro/image-to-video`
+- Polling fix: model-agnostic `falResultUrlFromStatus()`
+- Seedream v4 Edit + Reve Edit через `generate-edit-fal` edge fn
 
-## 2026-03 — Agent Second Brain
+## 2026-02 — Style System SSOT
 
-**Контекст:** Разработка генерирует много знаний которые теряются между сессиями.
-**Решение:** Telegram бот + Claude CLI на VPS + Obsidian vault с Git sync + Memory Engine (Ebbinghaus decay).
-**Результат:** Единая система где информация не забывается — автоматически классифицируется, связывается и доступна из любой точки.
+- SINGLE source of truth: `sharedStyleProfiles.ts` — 51 стиль
+- Каждый стиль: craftHints (composeSuffix, fusionSuffix, preferredProvider)
+- mandatoryPrefix для трансформативных стилей
+- Identity levels: strict → balanced → free
 
-## 2026-03 — Агентный инжиниринг (15 скиллов)
+## 2026-02 — Admin Panel
 
-**Контекст:** Проект слишком большой для одного контекстного окна.
-**Решение:** 15 специализированных скиллов: prompt-architect, lottie-animator, craft-engineer, supabase-ops, telegram-native, data-engineer, quality-guardian, unit-economist, growth-marketer, security-ops, agent-factory, code-reviewer, edge-reviewer, model-scout, video-pipeline-engineer.
-**Результат:** Каждый скилл содержит доменные знания, cross-domain knowledge, и self-update rules. Маршрутизация по триггерам в CLAUDE.md.
+- 5 секций: Генерации, Инфраструктура, Подарки, AI & Аналитика, Пользователи
+- URL params: `?s=section&t=tab`
+
+## 2026-02 — Animation Pipeline
+
+- 3 режима: color-transfer, shape-replace (основной), ai-generate
+- Shape-replace через VTracer vectorization
+- Edge function `generate-lottie-structure` создана но НЕ задеплоена
+
+## Связанные заметки
+- [[giftmixer-overview]] — Обзор проекта
+- [[giftmixer-lessons]] — Уроки
+- [[giftmixer-roadmap]] — Roadmap
