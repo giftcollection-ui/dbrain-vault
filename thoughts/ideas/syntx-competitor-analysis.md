@@ -1,7 +1,12 @@
-# SyntX.ai - Competitor Analysis
-Дата: 2026-03-14
-Контекст: Исследование AI-агрегатора SyntX.ai как ориентир для масштабирования GiftMixer
 ---
+type: idea
+title: SyntX.ai — Competitor Analysis
+date: 2026-03-14
+tags: [competition, syntx, ai-aggregator, market-research]
+---
+# SyntX.ai - Competitor Analysis
+
+Контекст: Исследование AI-агрегатора SyntX.ai как ориентир для масштабирования GiftMixer
 
 ## Что такое SyntX
 All-in-one AI агрегатор. 90+ нейросетей под одной подпиской ($10-30/мес).

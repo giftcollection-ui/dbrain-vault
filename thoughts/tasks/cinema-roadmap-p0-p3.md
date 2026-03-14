@@ -1,7 +1,12 @@
-# Cinema Studio — Verified Roadmap
-Дата: 2026-03-14
-Контекст: AI-аудит верифицирован против кодовой базы. 20 задач в 4 приоритетных блоках.
 ---
+type: task
+title: Cinema Studio — Verified Roadmap P0-P3
+date: 2026-03-14
+tags: [cinema, roadmap, tasks, priorities]
+---
+# Cinema Studio — Verified Roadmap
+
+Контекст: AI-аудит верифицирован против кодовой базы. 20 задач в 4 приоритетных блоках.
 
 ## P0 — Критические (неделя 1-2)
 1. Декомпозиция CinemaBuilderPage (1403 строки -> 5 phase-компонентов) [3-5 дней]

@@ -1,9 +1,8 @@
 ---
 type: project
 title: GiftMixer — AI Platform Overview
-last_accessed: 2026-03-04
-relevance: 1.0
-tier: core
+date: 2026-03-04
+tags: [giftmixer, overview, architecture, telegram]
 ---
 # GiftMixer — AI Platform for Telegram
 

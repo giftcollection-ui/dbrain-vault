@@ -1,9 +1,8 @@
 ---
-type: decisions
+type: idea
 title: GiftMixer — Key Decisions
-last_accessed: 2026-03-04
-relevance: 1.0
-tier: core
+date: 2026-03-04
+tags: [giftmixer, architecture, decisions]
 ---
 # GiftMixer — Ключевые архитектурные решения
 

@@ -1,9 +1,8 @@
 ---
-type: lessons
+type: learning
 title: GiftMixer — Lessons Learned
-last_accessed: 2026-03-04
-relevance: 1.0
-tier: active
+date: 2026-03-04
+tags: [giftmixer, ai-prompts, architecture, cinema]
 ---
 # GiftMixer — Уроки из разработки
 

@@ -1,9 +1,8 @@
 ---
-type: architecture
-title: Second Brain Architecture
-last_accessed: 2026-03-04
-relevance: 1.0
-tier: core
+type: idea
+title: Second Brain — Complete Architecture
+date: 2026-03-04
+tags: [second-brain, architecture, telegram-bot, obsidian, vault]
 ---
 # Second Brain — Complete Architecture
 

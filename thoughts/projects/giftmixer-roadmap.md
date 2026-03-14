@@ -1,9 +1,8 @@
 ---
-type: roadmap
+type: project
 title: GiftMixer — Roadmap & Vision
-last_accessed: 2026-03-04
-relevance: 1.0
-tier: core
+date: 2026-03-04
+tags: [giftmixer, roadmap, vision, strategy]
 ---
 # GiftMixer — Roadmap & Vision
 

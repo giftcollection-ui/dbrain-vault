@@ -1,62 +1,55 @@
 ---
 type: project
-description: >-
-  GiftMixer live project status — current sprint, decisions, open tasks, blockers. Updated by Claude Code after each significant session.
+title: GiftMixer — Live Status
+date: 2026-03-06
 tags: [giftmixer, project-status, live]
-status: active
-created: 2026-03-06
-updated: 2026-03-06
-last_accessed: 2026-03-06
-relevance: 1.0
-tier: active
 ---
 
 # GiftMixer — Live Status
 
 > Этот файл обновляется Claude Code автоматически после каждой значимой сессии.
 
-## Current Sprint
+## Current Sprint (2026-03-14)
 
-**Фокус:** Knowledge Circulation System — замкнуть петлю между Claude Code, Obsidian vault, NotebookLM и Telegram-ботом.
+**Фокус:** Cinema Builder — shared config SSOT + координация параллельных работ (Claude Code / Lovable / Gemini REFACTORING_PLAN).
 
-**Статус:** В процессе. Phase 1-2 завершены, Phase 3-4 в работе.
+**Статус:** Shared config consolidation завершена. P0 backend задачи в работе.
 
 ## Recent Decisions
 
 | Дата | Решение | Контекст |
 |------|---------|----------|
-| 2026-03-06 | Переехали бота на US VPS (23.94.252.50) | Google блокировал Cookie auth на EU серверах |
-| 2026-03-06 | process_message — умная классификация в боте | text.py + voice.py теперь роутят через Claude |
-| 2026-03-06 | mcp-obsidian удалён | Кириллица битая, Write tool надёжнее |
+| 2026-03-14 | Зоны ответственности для параллельных Cinema изменений | 3 вектора: мы=backend+config, Lovable=CSS/layout, Plan=structure |
+| 2026-03-14 | SSOT: archetypeDefinitions.ts + videoProviders.ts | Устранена фрагментация: 3 источника → 1 shared config |
+| 2026-03-14 | archetypeSuffix forwarding в recompose-scene | Frontend резолвит suffix → передаёт backend, не дублирует |
+| 2026-03-14 | Vault frontmatter стандартизация | Все thoughts/ файлы приведены к единому YAML формату |
+| 2026-03-06 | Переехали бота на US VPS | Google блокировал Cookie auth на EU серверах |
 
 ## Open HIGH Tasks
 
-- [ ] Vault search в боте (Phase 3) — контекст из заметок при ответах
-- [ ] Conversation mode `/chat` (Phase 4) — персистентный диалог с памятью
-- [ ] GiftMixer Architecture ноутбук в NotebookLM
-- [ ] Streaming ответов в боте (UX)
+- [ ] Синхронизировать архетипы в generate-story-brief (10→12)
+- [ ] Поднять image_prompt_strength 0.35→0.50
+- [ ] Error Boundary coverage в CinemaBuilderPage
+- [ ] Frame model selector + variant gallery (P1, ждём Lovable UI)
+- [ ] Character Lock editable (P1)
 
-## Architecture
+## Cinema Parallel Coordination
 
-```
-Telegram Bot (aiogram 3.x, VPS 23.94.252.50)
-  ↓ text/voice
-process_message() → Claude CLI subprocess
-  → [IDEA/LEARNING/DECISION] → vault/thoughts/
-  → [TASK] → Todoist MCP
-  → [RESEARCH] → NotebookLM MCP
-  → [DAILY] → vault/daily/YYYY-MM-DD.md
-  → [QUESTION] → direct answer
-
-Claude Code (Desktop) → vault/daily/ → git push → VPS pull (cron */10)
-```
+| Зона | Владелец | Статус |
+|------|----------|--------|
+| Backend (edge functions) | Claude Code | Активно |
+| Config SSOT | Claude Code | Завершено |
+| CSS/Design system | Lovable | Ожидаем |
+| Component structure | PLAN | Не начат |
+| SceneCard logic | Claude Code | P1 |
 
 ## Stack
 
 - Frontend: React 18 + Vite + TypeScript + Tailwind
 - Backend: Supabase Edge Functions (Deno), 57 functions
 - AI: nanoBananaPro (Gemini 3 Pro), falFlux (FAL.ai Flux), seedream45, lovable
-- Bot: aiogram 3.x, Deepgram Nova-3, Claude CLI, MCP (Todoist + NotebookLM)
+- Cinema: 2-agent Gemini pipeline (Director + Cinematographer), 12 visual archetypes
+- Bot: aiogram 3.x, Deepgram Nova-3, Claude CLI, MCP (Todoist)
 - Vault: Obsidian + git sync (GitHub ↔ Desktop ↔ VPS)
 
 ## Blockers
@@ -65,6 +58,6 @@ _нет активных блокеров_
 
 ## Next Session
 
-1. Реализовать vault search (читать релевантные заметки в промпт)
-2. Conversation mode с сохранением треда
-3. Тест полного цикла: идея → vault → /process → Todoist
+1. P0: sync generate-story-brief архетипы + strength 0.50
+2. P0: Error Boundary проверка
+3. P1: Frame model selector (после Lovable UI merge)
