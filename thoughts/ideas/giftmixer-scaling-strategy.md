@@ -1,7 +1,12 @@
-# GiftMixer Scaling Strategy
-Дата: 2026-03-14
-Контекст: На основе анализа SyntX.ai + текущих возможностей платформы
 ---
+type: idea
+title: GiftMixer Scaling Strategy
+date: 2026-03-14
+tags: [giftmixer, scaling, strategy, competition]
+---
+# GiftMixer Scaling Strategy
+
+Контекст: На основе анализа SyntX.ai + текущих возможностей платформы
 
 ## Текущая позиция
 - Telegram Mini App с AI-генерацией стикеров, крафтов, постеров, cinema

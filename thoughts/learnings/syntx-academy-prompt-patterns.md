@@ -1,7 +1,12 @@
-# Syntx Academy — Prompt Patterns for Cinema Studio
-Дата: 2026-03-14
-Контекст: Извлечено из 22 гайдов academy.syntx.ai для интеграции в Cinema pipeline
 ---
+type: learning
+title: SyntX Academy — Prompt Patterns for Cinema
+date: 2026-03-14
+tags: [cinema, prompt-engineering, syntx, video-generation]
+---
+# Syntx Academy — Prompt Patterns for Cinema Studio
+
+Контекст: Извлечено из 22 гайдов academy.syntx.ai для интеграции в Cinema pipeline
 
 ## 1. Универсальная структура видео-промпта
 ```

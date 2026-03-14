@@ -1,9 +1,12 @@
+---
+type: learning
+title: Cinema — Parallel Design Risk Analysis
+date: 2026-03-14
+tags: [cinema, parallel-work, risk-analysis, coordination]
+---
 # Cinema: Параллельный дизайн — анализ рисков и правила
 
-Дата: 2026-03-14
 Контекст: 3 параллельных вектора изменений Cinema (наш Claude Code, Lovable agent, REFACTORING_PLAN)
-
----
 
 ## Ситуация
 
