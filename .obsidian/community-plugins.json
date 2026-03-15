@@ -3,5 +3,8 @@
   "obsidian-local-rest-api",
   "smart-connections",
   "gemini-scribe",
-  "smart-chatgpt"
+  "smart-chatgpt",
+  "calendar",
+  "templater-obsidian",
+  "terminal"
 ]
