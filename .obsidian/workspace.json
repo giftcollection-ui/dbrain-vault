@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "thoughts/tasks/cinema-roadmap-p0-p3.md",
+                "file": "blog/2026-01-08-consumer-ai-2030-predictions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "cinema-roadmap-p0-p3"
+              "title": "2026-01-08-consumer-ai-2030-predictions"
             }
           }
         ]
@@ -195,31 +195,31 @@
       "gemini-scribe:Gemini Scribe: Agent Mode": false
     }
   },
-  "active": "2e40f5de4c97ff29",
+  "active": "241b71ec7633790d",
   "lastOpenFiles": [
+    "blog/2025-01-10-vibe-coding-guide.md",
+    "blog/2026-01-08-consumer-ai-2030-predictions.md",
+    "daily/2026-03-04.md",
     "daily/2026-03-15.md",
+    "daily/2026-03-14.md",
+    "goals/2-monthly.md",
+    "thoughts/learnings/cinema-parallel-design-analysis.md",
+    "thoughts/projects/giftmixer-live-status.md",
+    "thoughts/tasks/cinema-roadmap-p0-p3.md",
     "daily/2026-03-15.md.tmp.31212.1773523781156",
     "thoughts/economics",
     "thoughts/security",
     "thoughts/research",
-    "thoughts/learnings/cinema-parallel-design-analysis.md",
     "MEMORY.md",
     "gemini-scribe/Prompts/example-expert.md",
-    "blog/2025-01-10-vibe-coding-guide.md",
-    "blog/2026-01-08-consumer-ai-2030-predictions.md",
-    "thoughts/tasks/cinema-roadmap-p0-p3.md",
-    "daily/2026-03-14.md",
     "daily/2026-03-06.md",
-    "thoughts/projects/giftmixer-live-status.md",
     "thoughts/learnings/giftmixer-lessons.md",
     "goals/0-vision-3y.md",
     "thoughts/projects/giftmixer-overview.md",
-    "daily/2026-03-04.md",
     "templates/daily-template.md",
     "thoughts/ideas/giftmixer-decisions.md",
     "thoughts/projects/giftmixer-roadmap.md",
     "templates/crm-template.md",
-    "goals/2-monthly.md",
     "gemini-scribe/Prompts",
     "gemini-scribe",
     "thoughts/ideas/second-brain-architecture.md",
