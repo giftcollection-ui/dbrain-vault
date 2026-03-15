@@ -23,6 +23,32 @@ tier: core
 2. **Inpainting/Compositing** — НЕ голый Flux с reference. Нейросеть генерит фон, персонаж вписывается через Kontext Pro / маскинг.
 3. **Cache anchors, NOT generations** — кэшировать промпты и маски, НЕ готовые видео.
 
+## 2026-03 — Security Hardening v2 (10 fixes)
+
+**Контекст:** Полный security аудит выявил 10 уязвимостей.
+**Решения:**
+1. JWT auth middleware (`_shared/auth.ts`) — enforced на craft-roll, create-invoice, generate-video-async
+2. Telegram initData HMAC validation в sync-profile
+3. Server-side price catalog в create-invoice (клиент не может задать цену)
+4. Mandatory webhook signature validation (was optional)
+5. CORS hardening — dev origins только при `ENVIRONMENT=development`
+6. Atomic lootbox claim (race condition prevention)
+7. Hardcoded owner ID → `OWNER_TELEGRAM_ID` env var
+8. `_retry_of` payment bypass → server-side validation against failed jobs in DB
+9. `_corsHeaders` race condition → json() принимает corsHeaders как параметр
+10. `kling-30`/`kling-30-pro` promptKey mapping fix
+
+## 2026-03 — Prompt Architecture v2 (Two-Layer Design)
+
+**Контекст:** Промпты были статичные, одинаковые каждый раз. Нет адаптации под провайдеров.
+**Решения:**
+1. Два слоя: Technical (fixed) + Creative (pooled variants)
+2. `promptPool.ts` — FNV-1a hash seed для детерминированного выбора вариантов
+3. STYLE_GUIDES/ATMOSPHERE/PATTERNS → пулы с ротацией
+4. Provider-specific builders: WAN (natural lang), Hailuo (Delta), Kling (structured), Veo3 (5-Part), Seedance
+5. CriticVerdict с diagnosticTag для адаптивного re-compose
+**Файл знаний:** `.claude/skills/prompt-architect/references/provider-prompt-kb.md`
+
 ## 2026-03 — Security Sprint (4 CRITICAL)
 
 **Контекст:** Аудит безопасности перед запуском.

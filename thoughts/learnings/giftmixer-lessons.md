@@ -50,6 +50,13 @@ tier: core
 - **First-Frame Chaining** — extract last frame (FAL FFmpeg `-sseof -0.2 -frames:v 1`) → input следующей
 - Stale closure проблема: `setFrames(prev => { read prev; return prev; })` — единственный способ прочитать актуальный state из интервала
 
+## Security
+
+- **Module-level mutable state = race condition** в Deno.serve. `let _corsHeaders` переписывался каждым запросом параллельно. Фикс: передавать corsHeaders как параметр функции, не хранить в module scope.
+- **Retry bypass через client fields**: `_retry_of`/`_retry_count` позволяли клиенту скипнуть оплату. Всегда валидировать retry-заявки серверно (проверить что job существует, принадлежит юзеру, имеет status=failed).
+- **Server-side price catalog обязателен**: клиент НИКОГДА не должен передавать цену. Только `productId`, сервер смотрит в свою таблицу.
+- **promptKey mapping**: при добавлении нового провайдера (kling-30, veo3, seedance) — проверить что он есть во ВСЕХ switch/map/lookup, иначе `undefined` в промпте.
+
 ## Процесс
 
 - **НИКОГДА force kill браузер** — потеря cookies, сессий. Только ручное закрытие.
