@@ -73,8 +73,21 @@ tier: core
 - **Memory Engine (Ebbinghaus decay) работает** — знания не теряются, автоклассификация по tier
 - **Запись в vault через Write tool** надёжнее чем REST API (проблемы с кириллицей через API)
 
+## Deep Research Findings (2026-03-17)
+
+- **Kontext Pro/Max НЕ IP-Adapter** — sequence concatenation модель. `image_prompt_strength` в FAL API не существует (тихо игнорируется). Preservation контролируется через формулировку промпта.
+- **Kontext промпт-паттерны для preservation** — для chibi: "Keep exact same chibi art style, line weight, character proportions". Для фото: "Maintain exact facial features, hair, clothing". Три уровня: high/standard/low.
+- **Kling 3.0 cfg_scale** — 0-1, default 0.5. Для chibi: 0.6-0.7 (удержать стиль), для реалистичных: 0.4-0.5 (натуральное движение), для текстовых мемов: 0.7 (удержать текст).
+- **Kling Multi-Shot** — до 6 shots, 15s total, single API call. Экономия 3x vs отдельные генерации. `multi_prompt` array + `shot_type: "customize"`.
+- **WAN 2.6 hard limit 800 chars** — реально слышит первые 200-300 символов. Subject+action в начале, camera+style после.
+- **FAL.ai concurrency** — старт 2, масштабируется до 40 при $1000+ инвойсов. `submit()` + `webhook_url` для видео (не polling).
+- **Veo 3 НЕ поддерживает negative prompt** — код генерации должен пропускать negative для veo3.
+- **Krea.ai НЕ имеет Kling 3.0** — только Kling 1.0 Pro. FAL.ai предпочтителен для API.
+- **TG Mini App: 2-3 video тега одновременно** — больше вызывает memory pressure. IndexedDB > localStorage (TG может очистить).
+
 ## Связанные заметки
 - [[giftmixer-overview]] — Обзор проекта
 - [[giftmixer-decisions]] — Архитектурные решения
 - [[giftmixer-roadmap]] — Roadmap
 - [[second-brain-architecture]] — Архитектура Second Brain
+- [[deep-research-ai-models-cinema-tg-2026-03-17]] — Полный ресёрч
