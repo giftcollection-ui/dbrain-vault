@@ -135,3 +135,9 @@ tier: core
 - **Decision**: Cost multipliers live in backend PROVIDER_COST_MULTIPLIERS object (SSOT), frontend mirrors for preview only.
 - **Decision**: GENERATION_COSTS in types/lightning.ts is the SSOT for sticker/craft/enhance costs. All consumers import from there.
 - **Rationale**: Race conditions and cost mismatches are P0 launch blockers per Perplexity deep research audit.
+
+### 2026-03-17: Vision-Based Style & Motion Extraction (Phase 3.1B)
+- **Decision**: При генерации сцен анализировать исходный референс (gift-анимация, видео, фото) через Gemini Vision для автоматического определения визуального стиля и паттерна движения.
+- **Decision**: Результат анализа = auto-styleId + motion hint для video-gen промпта. Заменяет ручной выбор стиля когда исходник анимированный.
+- **Кейсы**: подарки из коллекции TG (анимированные), загруженные видео-референсы, статичные фото с auto-style.
+- **Rationale**: Стиль сцены должен вытекать из персонажа, а не задаваться отдельно. Источник идеи — Creative Content Engine (RoboNuggets): "analyze reference videos, extracting style/tone/pacing to inform prompts".
