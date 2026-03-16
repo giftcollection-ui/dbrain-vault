@@ -91,3 +91,10 @@ tier: core
 - [[giftmixer-roadmap]] — Roadmap
 - [[second-brain-architecture]] — Архитектура Second Brain
 - [[deep-research-ai-models-cinema-tg-2026-03-17]] — Полный ресёрч
+
+### 2026-03-17: Deep Research Round 2 — Payment Security
+- **Race condition on concurrent spend**: Original spend_lightning uses check-then-deduct pattern without row lock. Fix: spend_lightning_atomic() with SELECT FOR UPDATE + UUID idempotency key.
+- **Refund system was a stub**: console.warn in production. Fix: refund_lightning_atomic() SQL function linked to original transaction via refund_for column.
+- **Cost multiplier mismatch**: Backend had kling-pro at 3.2x, frontend at 3.4x. Veo3: backend 4.0x, frontend 2.9x. Backend hailuo was missing. Fix: centralized PROVIDER_COST_MULTIPLIERS object.
+- **Craft cost mismatch**: lightningService.ts had craft=5, types/lightning.ts had craft=6. Fix: SSOT import from types/lightning.ts.
+- **Server-side cost validation**: Video generation already computes cost server-side. Sticker generation relies on client-declared cost — vulnerability noted but deferred.

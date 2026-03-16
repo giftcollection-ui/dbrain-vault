@@ -128,3 +128,10 @@ tier: core
 - [[giftmixer-overview]] — Обзор проекта
 - [[giftmixer-lessons]] — Уроки
 - [[giftmixer-roadmap]] — Roadmap
+
+### 2026-03-17: Atomic Lightning + Refund Architecture
+- **Decision**: Migrate from spend_lightning to spend_lightning_atomic with idempotency key and FOR UPDATE lock.
+- **Decision**: Refunds restore balance as balance_purchased (never expires), linked via refund_for FK.
+- **Decision**: Cost multipliers live in backend PROVIDER_COST_MULTIPLIERS object (SSOT), frontend mirrors for preview only.
+- **Decision**: GENERATION_COSTS in types/lightning.ts is the SSOT for sticker/craft/enhance costs. All consumers import from there.
+- **Rationale**: Race conditions and cost mismatches are P0 launch blockers per Perplexity deep research audit.
